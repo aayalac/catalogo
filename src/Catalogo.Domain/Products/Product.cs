@@ -10,13 +10,16 @@ public sealed class Product : Entity
     public string? Description {get;set;}
     public string? ImageUrl {get; set;}
     public string? Code {get;set;}
+    public Guid CategoryId {get;set;}
+    private Product(){}
     private Product(
         Guid id,
         string name,
         decimal price,
         string description,
         string imageUrl,
-        string code
+        string code,
+        Guid categoryId
     ) : base(id)
     {
         Name = name;
@@ -24,6 +27,7 @@ public sealed class Product : Entity
         Description = description;
         ImageUrl = imageUrl;
         Code = code;
+        CategoryId = categoryId;
     }
 
     public static Product Create(
@@ -31,7 +35,8 @@ public sealed class Product : Entity
         decimal price,
         string description,
         string imageUrl,
-        string code
+        string code,
+        Guid categoryId
         )
         {
             var product = new Product(
@@ -40,7 +45,8 @@ public sealed class Product : Entity
                 price,
                 description,
                 imageUrl,
-                code
+                code,
+                categoryId
             );
             var productDomainEvent = new ProductCreatedDomainEvent(product.Id);
             product.RaiseDomainEvent(productDomainEvent);
