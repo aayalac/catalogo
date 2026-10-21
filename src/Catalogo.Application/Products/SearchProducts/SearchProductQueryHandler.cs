@@ -1,10 +1,11 @@
+using Catalogo.Application.Dtos;
 using Catalogo.Domain.Products;
 using MediatR;
 
 namespace Catalogo.Application.Products.SearchProducts;
 
 internal sealed class SearchProductQueryHandler
-: IRequestHandler<SearchProductQuery, Product>
+: IRequestHandler<SearchProductQuery, ProductDTO>
 {
     private readonly IProductRepository _productRepository;
 
@@ -13,13 +14,14 @@ internal sealed class SearchProductQueryHandler
         _productRepository = productRepository;
     }
 
-    public async Task<Product> Handle(
+    public async Task<ProductDTO> Handle(
         SearchProductQuery request, 
         CancellationToken cancellationToken
     )
     {
         var product = await _productRepository.GetByCode(request.Code!, cancellationToken);
+        
 
-        return product!;
+        return product!.ToDTO(request.Context!);
     }
 }

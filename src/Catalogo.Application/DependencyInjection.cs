@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 namespace Catalogo.Application;
 public static class DependencyInjection
@@ -11,6 +12,9 @@ public static class DependencyInjection
             configuration
             .RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
         });
+
+        services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
+
         return services;
     }
 }

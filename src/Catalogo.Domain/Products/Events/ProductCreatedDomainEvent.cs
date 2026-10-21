@@ -2,4 +2,4 @@ using Catalogo.Domain.Abstractions;
 
 namespace Catalogo.Domain.Products.Events;
 
-public sealed record ProductCreatedDomainEvent(Guid id) : IDomainEvent;
+public sealed record ProductCreatedDomainEvent(Guid Id) : IDomainEvent;
