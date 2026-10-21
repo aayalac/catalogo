@@ -1,3 +1,6 @@
+using Catalogo.Domain.Abstractions;
+using Catalogo.Domain.Products;
+using Catalogo.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +27,11 @@ public static class DependencyInjection
                 ).UseSnakeCaseNamingConvention();
 
             });
+
+            services
+            .AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<CatalogoDbContext>());
+            
+            services.AddScoped<IProductRepository, ProductRepository>();
 
 
             return services;
