@@ -30,4 +30,6 @@ if (app.Environment.IsDevelopment())
 app.ApplyMigration();
 await app.SeedCatalogoProduct();
 app.MapControllers();
+app.UseDefaultFiles();
+app.UseStaticFiles();
 app.Run();
